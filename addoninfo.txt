@@ -1,0 +1,8 @@
+"AddonInfo"
+{
+        addontitle      "One in the Chamber"
+        addonversion    "1.0"
+        addonauthor     "quadruple"
+        addonContent_Script     1
+        addonDescription        "One in the Chamber-style gamemode."
+}
