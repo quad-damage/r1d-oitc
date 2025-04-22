@@ -4,4 +4,4 @@ OITC (One in the Chamber) is a fast-paced server-side addon for R1Delta. In this
 
 ## Requirements
 
-You **must** have [quad-loader](https://github.com/quad-damage/quad-loader) installed to use OITC.
+You **must** have [quad-loader](https://github.com/quad-damage/r1d-quad-loader) installed to use OITC.
