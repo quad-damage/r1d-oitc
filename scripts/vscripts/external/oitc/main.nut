@@ -3,7 +3,6 @@ function main() {
 	AddCallback_OnPlayerRespawned(on_player_respawn)
 	
 	RegisterSignal("EndGiveLoadouts")
-	RegisterSignal("PlayerCinematicDone")
 }
 
 function on_player_damage(ent, damageInfo) {
@@ -11,21 +10,24 @@ function on_player_damage(ent, damageInfo) {
 	if(inflictor == null || !inflictor.IsPlayer())
 		return
 	
-	local weapon = damageInfo.GetWeapon()
+	local weapon = inflictor.GetActiveWeapon()
 	if(weapon == null)
 		return
 	
-	local weaponName = weapon.GetClassname()
-	printt(weaponName)
-	if(weaponName != "mp_weapon_wingman") {
-		give_oitc_weapons(inflictor)
-		damageInfo.SetDamage(0)
-		return
+	if(damageInfo.GetDamageSourceIdentifier() == eDamageSourceId.human_melee) {
+		weapon.SetWeaponPrimaryAmmoCount(0)
+		weapon.SetWeaponPrimaryClipCount(1)
+	} else {
+		if(weapon.GetClassname() != "mp_weapon_wingman") {
+			give_oitc_weapons(inflictor)
+			damageInfo.SetDamage(0)
+			return
+		}
+
+		damageInfo.SetDamage(99999)
+		weapon.SetWeaponPrimaryAmmoCount(0)
+		weapon.SetWeaponPrimaryClipCount(2)
 	}
-	
-	damageInfo.SetDamage(99999)
-	weapon.SetWeaponPrimaryAmmoCount(0)
-	weapon.SetWeaponPrimaryClipCount(2) // :-)
 }
 
 function on_player_respawn(player) {
